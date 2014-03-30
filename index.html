@@ -1,0 +1,135 @@
+<DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>jQueryの練習</title>
+    <style>
+        .myStyle{
+            border:5px solid green;
+            font-size:48px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+	<p>jQueryの練習</p>
+    
+    <div id="box" style="width:100px;height:100px;background:red;"></div>
+    
+    <p><a href="http://google.com" data-sitename="google">Google</a></p>
+   
+    <input type="text" id="name">
+    <select id="members">
+        <option>Kazunari</option>
+        <option>Kenji</option>
+        <option>Masahiro</option>
+    </select>
+    <br>
+    <button>Add!</button>
+
+    <ul id="main">
+        <li>0</li>
+        <li class="item">1</li>
+        <li class="item">2</li>
+        <li>
+            3
+            <ul id="sub">
+                <li>3-0</li>
+                <li>3-1</li>
+                <li class="item">3-2</li>
+                <li class="item">3-3</li>
+                <li>3-4</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+        //$(document).ready(function(){
+        //セレクタ：処理対象となるDOM(Document Object Model)要素を指定する記法
+        //DOM：ドキュメント(HTML文書)をオブジェクトとして取り扱う仕組み
+        //メソッド：処理
+        //メソッドチェーン：メソッドを続けて書くこと
+        $(function(){
+            //$('a[href="http://google.com"]').css('background','gray')
+            //$('a[href="http://google.com"]').css('background','gray')
+            $("p:eq(0)").addClass("myStyle");
+            $('a[href*="dot"]').css('background','gray');
+            
+            //console.log($("a").attr("href"));
+            //$("a").attr("href", "http://google.co.jp");
+            //$("a").data("sitename", "Google");
+            
+            //$('a').text('just changed!');
+            //$('p').html('<a href="">click me!</a>');
+            //$('input').val('Hello, World!');
+            //$('a').empty();
+            //$('a').remove();
+            
+            var li = $('<li>').text('just added');
+            
+            $('#box').hide(300);
+            $('#box').show(300);
+            $('#box').fadeOut(300);
+            $('#box').fadeIn(300);
+            $('#box').toggle(300);
+            $('#box').toggle(300);
+            
+            $('#box').click(function(){
+                alert("hi!");            
+            });
+            
+            $('#box')
+                .mouseover(function(){
+                $(this).css('background','blue');            
+                })
+            ;
+            
+            $('#box').mouseout(function(){
+                $(this).css('background','red');            
+                });
+            
+            $('#box').mousemove(function(e){
+                $(this).text(e.pageX);            
+                });
+            
+            $('#name')
+                .focus(function(){
+                    $(this).css('background','skyblue');
+                })
+                .blur(function(){
+                    $(this).css('background','white');
+                });
+            
+            $('#members')
+                .change(function(){
+                    alert('Changed!');
+                });
+            
+            $('button').click(function(){
+                var p = $('<p>').text('文字をクリックすると消えます！').addClass('vanish');
+                $(this).before(p);
+            });
+            
+            $('body').on('click','.vanish',function(){
+                $(this).remove();
+            });
+
+            //$('ul > li:eq(1)').before(li);
+            //$('ul > li:eq(1)').after(li);
+            //$('#main').append(li);
+            $('#main').prepend(li);
+            
+            console.log($("a").attr("href"));
+            console.log($("a").data("sitename"));
+            
+            $("#sub > li:odd").css('color', 'red'); 
+            $("#sub > li:even").css('color', 'blue'); 
+            $("#sub").parent().css('color', 'pink');
+            $("#main > li:eq(3)").siblings().css('color', 'green');
+            
+        });
+    </script>
+</head>
+</body>
+</html>
